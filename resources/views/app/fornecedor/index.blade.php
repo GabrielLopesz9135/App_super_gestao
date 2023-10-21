@@ -35,32 +35,49 @@
           <th>Company</th>
           <th>Status</th>
           <th>CNPJ</th>
-        </tr>
-        <tr>
-          <td>Guaraná</td>
-          <td>Ativo</td>
-          <td>12.123.123/123</td>
+          <th>Telefone</th>
+          <th>Cidade</th>
         </tr>
 
-        @foreach ($fornecedores as $fornecedor)
-        <tr>
-            <td> {{$fornecedor['nome']}} </td>  
-            <td> {{$status[$fornecedor['status']]}} </td> 
-            <td>
-                @isset($fornecedor['CNPJ'])
-                    {{$fornecedor['CNPJ']}}
-                    @empty($fornecedor['CNPJ'])
-                        - Vazio 
-                    @endempty
-                @endisset
-            </td>
-        </tr>
-@endforeach
+        @isset($fornecedores)
+            @forelse ($fornecedores as $fornecedor)
+                <tr>
+                    <td> {{$fornecedor['nome'] ?? "Dado Não Informado"}} </td>  
+                    <td> {{$status[$fornecedor['status']] ?? "Dado Não Informado"}} </td> 
+                    <td> {{$fornecedor['CNPJ'] ?? "Dado Não Informado"}}</td>
+                    <td> ({{$fornecedor['DDD']}}) {{$fornecedor['Telefone']}} </td>
+                    <td>
+                        @switch($fornecedor['DDD'])
+                            @case('028')
+                                Venda Nova do Imigrante - ES
+                                @break                           
+                            @case('011')
+                                São Paulo - SP
+                                @break                               
+                            @case('021')
+                                Rio de Janeiro - RJ
+                                @break
+                            @default
+                                Estado Não Identificado
+                                
+                        @endswitch
+                    </td>
+                </tr>
+                @if($loop->last)
+                    </table>  
+                @endif
+                
+                @empty
+                    </table>  
+                    <h1>Não existem Fornecedores Cadastrados</h1>
+
+            @endforelse
+        @endisset
+        
 
         
 
 
-      </table>
 </body>
 </html>
 
