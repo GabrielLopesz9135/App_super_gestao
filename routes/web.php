@@ -13,9 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('contato')->group(function(){
+    Route::get('/index', [App\Http\Controllers\ContatoController::class, 'contato'])->name('site.contato');
+    Route::post('/store', [App\Http\Controllers\ContatoController::class, 'store'])->name('site.store');
+});
+
 Route::get('/', [App\Http\Controllers\PrincipalController::class, 'principal'])->name('site.index');
-Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'contato'])->name('site.contato');
-Route::post('/contato', [App\Http\Controllers\ContatoController::class, 'contato'])->name('site.contato');
 Route::get('/sobrenos', [App\Http\Controllers\SobreNosController::class, 'sobreNos'])->name('site.sobrenos');
 
 Route::prefix('app')->group(function(){
@@ -31,7 +34,7 @@ Route::get('/teste/{valor1}/{valor2}', [App\Http\Controllers\TesteController::cl
 
 
 Route::fallback(function(){
-    echo "A pagina acessada não existe dentro do sistema, <a href='".route('site.principal')."'> clique aqui </a> para voltar para a pagina inicial";
+    echo "A pagina acessada não existe dentro do sistema, <a href='".route('site.index')."'> clique aqui </a> para voltar para a pagina inicial";
 });
 
 
