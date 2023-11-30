@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MotivoContato;
 use Illuminate\Http\Request;
 use App\Models\SiteContato;
 
@@ -15,8 +16,8 @@ class ContatoController extends Controller
     }
     
     public function contato(Request $request){
-
-       return view("site.contato", ['titulo'=>'Contato']);
+       $motivo_contatos = MotivoContato::all();
+       return view("site.contato", ['titulo'=>'Contato', 'motivo_contatos'=>$motivo_contatos]);
 
     }
 
@@ -26,8 +27,8 @@ class ContatoController extends Controller
         $request->validate([
             'nome' => 'required|min:3|max:40',
             'telefone' => 'required',
-            'email' => 'required',
-            'motivo_contato' => 'required',
+            'email' => 'email',
+            'motivo_contatos_id' => 'required',
             'mensagem' => 'required'
         ]);
         
