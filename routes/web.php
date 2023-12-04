@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +22,10 @@ Route::prefix('contato')->group(function(){
 Route::get('/', [App\Http\Controllers\PrincipalController::class, 'principal'])->name('site.index');
 Route::get('/sobrenos', [App\Http\Controllers\SobreNosController::class, 'sobreNos'])->name('site.sobrenos');
 
-Route::prefix('app')->group(function(){
-    Route::get('/login', function(){return 'Login';})->name('app.login');
+Route::get('/login', [\App\Http\Controllers\LoginController::class, 'index'])->name('site.login');
+Route::post('/login', [\App\Http\Controllers\LoginController::class, 'autenticar'])->name('site.login');
+
+Route::middleware('autenticacao')->prefix('app')->group(function(){ 
     Route::get('/fornecedores', [\App\Http\Controllers\FornecedorController::class, 'index'])->name('app.fornecedores');
     Route::get('/clientes', function(){return 'Clientes';})->name('app.clientes');
     Route::get('/produtos', function(){return 'Produtos';})->name('app.produtos');
