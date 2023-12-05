@@ -52,4 +52,9 @@ class LoginController extends Controller
             return redirect()->route('site.login', ['erro'=>'E-mail ou senha incorretos', 'email'=> $email]);
         }
     }
+
+    public function logout(){
+        session_destroy();
+        return redirect()->route('site.index');
+    }
 }

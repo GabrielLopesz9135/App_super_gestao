@@ -26,8 +26,10 @@ Route::get('/login', [\App\Http\Controllers\LoginController::class, 'index'])->n
 Route::post('/login', [\App\Http\Controllers\LoginController::class, 'autenticar'])->name('site.login');
 
 Route::middleware('autenticacao')->prefix('app')->group(function(){ 
+    Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('app.home');
+    Route::get('/logout', [\App\Http\Controllers\LoginController::class, 'logout'])->name('app.logout');
+    Route::get('/clientes', [\App\Http\Controllers\ClienteController::class, 'index'])->name('app.clientes');
     Route::get('/fornecedores', [\App\Http\Controllers\FornecedorController::class, 'index'])->name('app.fornecedores');
-    Route::get('/clientes', function(){return 'Clientes';})->name('app.clientes');
     Route::get('/produtos', function(){return 'Produtos';})->name('app.produtos');
 });
 
