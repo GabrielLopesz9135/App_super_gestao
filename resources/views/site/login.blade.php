@@ -16,8 +16,9 @@
             <div style="width: 30%; margin-left:auto; margin-right:auto;">
                 <form action="{{ route('site.login')}}" method="POST">
                     @csrf
+                    <p style="color: red">{{$erro}}</p>
                     <label for="email">E-mail</label>
-                    <input type="email" value="{{ old('email') }}" name="email" id="email" class="borda-preta">
+                    <input type="email" value="{{ old('email') ? old('email') : $email }}" name="email" id="email" class="borda-preta">
                     {{ $errors->has('email') ? $errors->first('email') : ''}} <br>
                     <label for="senha">Senha</label>
                     <input type="password" value="{{ old('senha') }}"  name="senha" id="senha" class="borda-preta">

@@ -16,8 +16,11 @@ class LoginController extends Controller
     }
 
 
-    public function index(){
-        return view('site.login',  ['titulo'=>'Login']);
+    public function index(Request $request){
+
+        $erro = $request->get('erro');
+        $email = $request->get('email');
+        return view('site.login',  ['titulo'=>'Login', 'erro'=>$erro, 'email'=>$email]);
     }
 
     public function autenticar(Request $request){
@@ -37,14 +40,16 @@ class LoginController extends Controller
         $email = $request->get('email');
         $senha = $request->get('senha');
 
-        echo "Email: ". $email . "| Senha:" . $senha;
-
         $user = $this->model->where('email', $email)->where('password', $senha)->get()->first();
 
         if(isset($user->name)){
-            echo "Usuario Existe";
+            session_start();
+            $_SESSION['nome'] = $user->name;
+            $_SESSION['email'] = $user->email;
+
+            return redirect()->route('app.clientes');
         }else{
-            echo "Usuario não encontrado";
+            return redirect()->route('site.login', ['erro'=>'E-mail ou senha incorretos', 'email'=> $email]);
         }
     }
 }
