@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('contato')->group(function(){
-    Route::get('/index', [App\Http\Controllers\ContatoController::class, 'contato'])->name('site.contato');
+    Route::get('/', [App\Http\Controllers\ContatoController::class, 'contato'])->name('site.contato');
     Route::post('/store', [App\Http\Controllers\ContatoController::class, 'store'])->name('site.store');
 });
 
@@ -25,11 +25,21 @@ Route::get('/sobrenos', [App\Http\Controllers\SobreNosController::class, 'sobreN
 Route::get('/login', [\App\Http\Controllers\LoginController::class, 'index'])->name('site.login');
 Route::post('/login', [\App\Http\Controllers\LoginController::class, 'autenticar'])->name('site.login');
 
+
+Route::middleware('autenticacao')->prefix('fornecedores')->group(function(){
+    Route::get('/', [\App\Http\Controllers\FornecedorController::class, 'index'])->name('fornecedores.index');
+    Route::post('/show', [\App\Http\Controllers\FornecedorController::class, 'show'])->name('fornecedores.show');
+    Route::get('/create', [\App\Http\Controllers\FornecedorController::class, 'create'])->name('fornecedores.create');
+    Route::post('/store', [\App\Http\Controllers\FornecedorController::class, 'store'])->name('fornecedores.store');
+    Route::get('/edit/{id}', [\App\Http\Controllers\FornecedorController::class, 'edit'])->name('fornecedores.edit');
+    Route::post('/update', [\App\Http\Controllers\FornecedorController::class, 'update'])->name('fornecedores.update');
+});
+
 Route::middleware('autenticacao')->prefix('app')->group(function(){ 
     Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('app.home');
     Route::get('/logout', [\App\Http\Controllers\LoginController::class, 'logout'])->name('app.logout');
     Route::get('/clientes', [\App\Http\Controllers\ClienteController::class, 'index'])->name('app.clientes');
-    Route::get('/fornecedores', [\App\Http\Controllers\FornecedorController::class, 'index'])->name('app.fornecedores');
+   
     Route::get('/produtos', function(){return 'Produtos';})->name('app.produtos');
 });
 

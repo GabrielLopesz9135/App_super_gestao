@@ -16,9 +16,9 @@ class LogAcessoMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $ip = $request->server->get("REMOTE_ADDR");
+        /* $ip = $request->server->get("REMOTE_ADDR");
         $rota = $request->getRequestUri();
-        LogAcesso::create(['log'=>"O $ip requisitou a rota $rota"]);
+        LogAcesso::create(['log'=>"O $ip requisitou a rota $rota"]); */
         return $next($request);
     }
 }
