@@ -29,6 +29,7 @@ Route::post('/login', [\App\Http\Controllers\LoginController::class, 'autenticar
 Route::middleware('autenticacao')->prefix('fornecedores')->group(function(){
     Route::get('/', [\App\Http\Controllers\FornecedorController::class, 'index'])->name('fornecedores.index');
     Route::post('/show', [\App\Http\Controllers\FornecedorController::class, 'show'])->name('fornecedores.show');
+    Route::get('/show', [\App\Http\Controllers\FornecedorController::class, 'show'])->name('fornecedores.show');
     Route::get('/create', [\App\Http\Controllers\FornecedorController::class, 'create'])->name('fornecedores.create');
     Route::post('/store', [\App\Http\Controllers\FornecedorController::class, 'store'])->name('fornecedores.store');
     Route::get('/edit/{id}', [\App\Http\Controllers\FornecedorController::class, 'edit'])->name('fornecedores.edit');
