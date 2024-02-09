@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProdutoController;
 use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -34,14 +35,17 @@ Route::middleware('autenticacao')->prefix('fornecedores')->group(function(){
     Route::post('/store', [\App\Http\Controllers\FornecedorController::class, 'store'])->name('fornecedores.store');
     Route::get('/edit/{id}', [\App\Http\Controllers\FornecedorController::class, 'edit'])->name('fornecedores.edit');
     Route::post('/update', [\App\Http\Controllers\FornecedorController::class, 'update'])->name('fornecedores.update');
+    Route::get('/delete/{id}', [\App\Http\Controllers\FornecedorController::class, 'delete'])->name('fornecedores.delete');
 });
+
+Route::resource('produtos', ProdutoController::class);
 
 Route::middleware('autenticacao')->prefix('app')->group(function(){ 
     Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('app.home');
     Route::get('/logout', [\App\Http\Controllers\LoginController::class, 'logout'])->name('app.logout');
     Route::get('/clientes', [\App\Http\Controllers\ClienteController::class, 'index'])->name('app.clientes');
    
-    Route::get('/produtos', function(){return 'Produtos';})->name('app.produtos');
+
 });
 
 

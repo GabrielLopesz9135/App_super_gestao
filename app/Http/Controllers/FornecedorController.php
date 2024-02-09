@@ -78,4 +78,9 @@ class FornecedorController extends Controller
 
         return redirect()->route('fornecedores.edit', ['id'=> $fornecedor->id, 'mensagem'=> $mensagem]);
     }
+
+    public function delete(int $id){
+       Fornecedor::find($id)->delete();
+       return redirect()->route("fornecedores.index");
+    }
 }

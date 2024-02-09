@@ -35,7 +35,7 @@
                                 <td class="border border-black" >{{ $fornecedor->site}}</td>
                                 <td class="border border-black">{{ $fornecedor->UF}}</td>
                                 <td class="border border-black">{{ $fornecedor->email}}</td> 
-                                <td class="border border-black">Excluir</td>
+                                <td class="border border-black"><a href="{{route('fornecedores.delete', ['id'=> $fornecedor->id]) }}">Excluir</a></td>
                                 <td class="border border-black"><a href="{{route('fornecedores.edit', ['id'=> $fornecedor->id]) }}">Editar</a></td>
                             </tr>
                         @endforeach
