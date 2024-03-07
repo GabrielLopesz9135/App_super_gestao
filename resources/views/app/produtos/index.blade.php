@@ -13,7 +13,7 @@
         
         <div class="menu">
             <ul>
-                <li><a href="{{ route('produto.create')}}">Novo </a></li>
+                <li><a href="{{ route('produtos.create')}}">Novo </a></li>
                 <li><a href="">Consulta</a></li>
             </ul>
         </div>
@@ -30,19 +30,21 @@
                             <th class="border border-black">UN</th>
                             <th class="border border-black"></th>
                             <th class="border border-black"></th>
+                            <th class="border border-black"></th>
                         </tr>
                     </thead>
 
                     <tbody>
 
                         @foreach ($produtos as $produto)
-                            <tr>
+                            <tr >
                                 <td class="border border-black">{{ $produto->nome}}</td>
                                 <td class="border border-black" >{{ $produto->descricao}}</td>
                                 <td class="border border-black">{{ $produto->peso}}</td>
                                 <td class="border border-black">{{ $produto->unidade_id}}</td> 
-                                {{-- <td class="border border-black"><a href="{{route('fornecedores.delete', ['id'=> $fornecedor->id]) }}">Excluir</a></td>
-                                <td class="border border-black"><a href="{{route('fornecedores.edit', ['id'=> $fornecedor->id]) }}">Editar</a></td> --}}
+                                <td class="border border-black"><a href="{{ route('produtos.show', ['produto'=>$produto->id])}}">Visualizar</a></td>
+                                <td class="border border-black"><a href="">Excluir</a></td>
+                                <td class="border border-black"><a href="">Editar</a></td> 
                             </tr>
                         @endforeach
 
