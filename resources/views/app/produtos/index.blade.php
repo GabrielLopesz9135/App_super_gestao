@@ -37,11 +37,17 @@
                     <tbody>
 
                         @foreach ($produtos as $produto)
-                            <tr >
+                            <tr>
                                 <td class="border border-black">{{ $produto->nome}}</td>
                                 <td class="border border-black" >{{ $produto->descricao}}</td>
                                 <td class="border border-black">{{ $produto->peso}}</td>
-                                <td class="border border-black">{{ $produto->unidade_id}}</td> 
+                                
+                                @foreach ($unidades as $unidade)
+                                    @if ($unidade->id == $produto->unidade_id)
+                                        <td class="border border-black">{{$unidade->descricao}} </td>  
+                                    @endif  
+                                @endforeach
+                                
                                 <td class="border border-black"><a href="{{ route('produtos.show', ['produto'=>$produto->id])}}">Visualizar</a></td>
                                 
                                 <td class="border border-black">

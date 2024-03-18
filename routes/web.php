@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\ProdutoDetalheController;
 use App\Http\Middleware\LogAcessoMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,8 @@ Route::middleware('autenticacao')->prefix('fornecedores')->group(function(){
 });
 
 Route::resource('produtos', ProdutoController::class);
+
+Route::resource('produtos-detalhe', ProdutoDetalheController::class);
 
 Route::middleware('autenticacao')->prefix('app')->group(function(){ 
     Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('app.home');
