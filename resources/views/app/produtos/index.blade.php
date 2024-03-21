@@ -28,6 +28,9 @@
                             <th class="border border-black">Descição</th>
                             <th class="border border-black">Peso</th>
                             <th class="border border-black">UN</th>
+                            <th class="border border-black">Comprimento</th>
+                            <th class="border border-black">Largura</th>
+                            <th class="border border-black">Altura</th>
                             <th class="border border-black"></th>
                             <th class="border border-black"></th>
                             <th class="border border-black"></th>
@@ -41,12 +44,16 @@
                                 <td class="border border-black">{{ $produto->nome}}</td>
                                 <td class="border border-black" >{{ $produto->descricao}}</td>
                                 <td class="border border-black">{{ $produto->peso}}</td>
-                                
-                                @foreach ($unidades as $unidade)
+                                {{-- @foreach ($unidades as $unidade)
                                     @if ($unidade->id == $produto->unidade_id)
                                         <td class="border border-black">{{$unidade->descricao}} </td>  
                                     @endif  
-                                @endforeach
+                                @endforeach --}}
+
+                                <td class="border border-black">{{ $produto->unidade->descricao ?? ''}}</td>
+                                <td class="border border-black">{{ $produto->produtoDetalhe->comprimento ?? ''}}</td>
+                                <td class="border border-black">{{ $produto->produtoDetalhe->largura ?? ''}}</td>
+                                <td class="border border-black">{{ $produto->produtoDetalhe->altura ?? ''}}</td>
                                 
                                 <td class="border border-black"><a href="{{ route('produtos.show', ['produto'=>$produto->id])}}">Visualizar</a></td>
                                 

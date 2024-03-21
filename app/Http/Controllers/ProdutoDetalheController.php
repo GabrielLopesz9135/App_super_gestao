@@ -32,7 +32,7 @@ class ProdutoDetalheController extends Controller
     public function store(Request $request)
     {
         ProdutoDetalhe::create($request->all());
-        return redirect()->route('produtos-detalhe.index');
+        return redirect()->route('produtos.index');
     }
 
     /**
@@ -58,7 +58,9 @@ class ProdutoDetalheController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $produtoDetalhe = ProdutoDetalhe::find($id);
+        $produtoDetalhe->update($request->all());
+        return redirect()->route('produtos-detalhe.edit', ['produtos_detalhe' => $id]);
     }
 
     /**
