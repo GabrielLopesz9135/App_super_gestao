@@ -26,6 +26,7 @@
                         <tr>
                             <th class="border border-black">Nome</th>
                             <th class="border border-black">Descição</th>
+                            <th class="border border-black">Fornecedor</th>
                             <th class="border border-black">Peso</th>
                             <th class="border border-black">UN</th>
                             <th class="border border-black">Comprimento</th>
@@ -43,13 +44,8 @@
                             <tr>
                                 <td class="border border-black">{{ $produto->nome}}</td>
                                 <td class="border border-black" >{{ $produto->descricao}}</td>
+                                <td class="border border-black" >{{ $produto->fornecedor->nome}}</td>
                                 <td class="border border-black">{{ $produto->peso}}</td>
-                                {{-- @foreach ($unidades as $unidade)
-                                    @if ($unidade->id == $produto->unidade_id)
-                                        <td class="border border-black">{{$unidade->descricao}} </td>  
-                                    @endif  
-                                @endforeach --}}
-
                                 <td class="border border-black">{{ $produto->unidade->descricao ?? ''}}</td>
                                 <td class="border border-black">{{ $produto->produtoDetalhe->comprimento ?? ''}}</td>
                                 <td class="border border-black">{{ $produto->produtoDetalhe->largura ?? ''}}</td>
