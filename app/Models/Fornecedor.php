@@ -19,4 +19,8 @@ class Fornecedor extends Model
         'UF',
         'email'
     ];
+
+    public function produtos(){
+        return $this->hasMany(Produto::class, 'fornecedor_id', 'id');
+    }
 }

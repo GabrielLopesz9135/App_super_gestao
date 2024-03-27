@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fornecedor;
 use App\Models\Produto;
 use App\Models\ProdutoDetalhe;
 use App\Models\Unidade;
@@ -46,7 +47,8 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
-        return view('app.produtos.create',['unidades'=> $unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produtos.create',['unidades'=> $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**
@@ -54,10 +56,13 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
+        
         $regras = [
             'nome' => 'required|min:3|max:40',
             'descricao' => 'required|min:3|max:2000',
             'peso' => 'required|integer',
+            'fornecedor_id' => 'required|integer',
+            'fornecedor_id' => 'exists:fornecedores,id',
             'unidade_id' => 'exists:unidades,id'
         ];
 
@@ -67,7 +72,8 @@ class ProdutoController extends Controller
             'nome.max' => 'O campo :attribute deve ter no máximo 40 caracteres',
             'descricao.max' => 'O campo :attribute deve ter no máximo 2000 caracteres',
             'peso.integer' => 'O campo peso deve ser um número inteiro',
-            'unidade_id.exists' => 'A unidade de medida informada não existe no banco de dados'
+            'unidade_id.exists' => 'A unidade de medida informada não existe no banco de dados',
+            'fornecedor_id.exists' => 'O fornecedor informado não existe no banco de dados'
         ];
 
         $request->validate($regras, $feedback);
@@ -90,7 +96,8 @@ class ProdutoController extends Controller
     public function edit(Produto $produto)
     {
         $unidades = Unidade::All();
-        return view('app.produtos.edit', ['produto' => $produto, 'unidades' => $unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produtos.edit', ['produto' => $produto, 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     /**

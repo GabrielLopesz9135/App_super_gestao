@@ -25,5 +25,14 @@
 </select>
     {{$errors->has('unidade_id') ? $errors->first('unidade_id') : ''}}
 
+    <select name="fornecedor_id" id="fornecedor_id" class="borda">
+        <option value="">-- Selecione um Fornecedor --</option>
+        @foreach ($fornecedores as $fornecedor)
+            <option value="{{$fornecedor->id}}" {{ ( $produto->fornecedor->id ?? old('fornecedor_id')) == $fornecedor->id ? 'selected' : '' }}>{{$fornecedor['nome']}}</option> 
+        
+            @endforeach
+    </select>
+        {{$errors->has('fornecedor_id') ? $errors->first('fornecedor_id') : ''}}
+
 <button type="submit" class="borda-preta">Salvar</button>
 </form>
