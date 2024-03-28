@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\PedidoProdutoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProdutoDetalheController;
 use App\Http\Middleware\LogAcessoMiddleware;
+use App\Models\Cliente;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,14 +45,17 @@ Route::middleware('autenticacao')->prefix('fornecedores')->group(function(){
 
 Route::resource('produtos', ProdutoController::class);
 
+Route::resource('clientes', ClienteController::class);
+Route::resource('pedidos', PedidoController::class);
+Route::resource('pedidos-produtos', PedidoProdutoController::class);
+
 Route::resource('produtos-detalhe', ProdutoDetalheController::class);
+
+
 
 Route::middleware('autenticacao')->prefix('app')->group(function(){ 
     Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('app.home');
-    Route::get('/logout', [\App\Http\Controllers\LoginController::class, 'logout'])->name('app.logout');
-    Route::get('/clientes', [\App\Http\Controllers\ClienteController::class, 'index'])->name('app.clientes');
-   
-
+    Route::get('/logout', [\App\Http\Controllers\LoginController::class, 'logout'])->name('app.logout');  
 });
 
 

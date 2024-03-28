@@ -2,24 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cliente;
 use Illuminate\Http\Request;
 
-class ClienteController extends Controller
+class PedidoController extends Controller
 {
-    private $model;
-
-    public function __construct(Cliente $data)
-    {
-        $this->model = $data;
-    }
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        $clientes = $this->model->paginate(10);
-        return view('app.clientes.index', ['titulo'=>'Clientes', 'clientes' => $clientes, 'request'=> $request->all()]);
+        //
     }
 
     /**
