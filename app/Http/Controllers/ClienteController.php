@@ -27,7 +27,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('app.clientes.create');
     }
 
     /**
@@ -35,7 +35,32 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $regras = [
+            'nome' => 'required|min:3|max:40',
+            'email' => 'required|min:3|max:50',
+            'telefone' => 'required|min:3|max:20',
+            'cpf' => 'required|min:10|max:15',
+            'endereco' => 'required|min:10|max:2000',
+
+        ];
+
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'nome.min' => 'O campo :attribute deve ter no mínimo 3 caracteres',
+            'nome.max' => 'O campo :attribute deve ter no máximo 40 caracteres',
+            'email.min' => 'O campo :attribute deve ter no mínimo 3 caracteres',
+            'email.max' => 'O campo :attribute deve ter no máximo 50 caracteres',
+            'telefone.min' =>'O campo :attribute deve ter no mínimo 3 caracteres',
+            'telefone.max' => 'O campo :attribute deve ter no maximo 20 caracteres',
+            'cpf.min' => 'Insira um CPF Válido',
+            'cpf.max' => 'Insira um CPF Válido',
+            'endereco.max' => 'O campo :attribute deve ter no máximo 2000 caracteres'
+        ];
+
+        $request->validate($regras, $feedback);
+
+        Cliente::create($request->all());
+        return  redirect()->route('clientes.index');
     }
 
     /**

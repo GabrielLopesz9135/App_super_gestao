@@ -2,16 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 
 class PedidoController extends Controller
 {
+
+    private $model;
+
+    public function __construct(Pedido $data)
+    {
+        $this->model = $data;
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $pedidos = $this->model->paginate(10);
+        $clientes = Cliente::all();
+        return view('app.pedidos.index', ['pedidos' => $pedidos, 'request'=> $request->all()]);
     }
 
     /**
