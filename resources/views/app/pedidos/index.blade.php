@@ -27,6 +27,7 @@
                             <th class="border border-black">ID Pedido</th>
                             <th class="border border-black">Cliente</th>
                             <th class="border border-black">Data</th>
+                            <th class="border border-black">Adicionar Produtos</th>
 
                             <th class="border border-black"></th>
                             <th class="border border-black"></th>
@@ -40,13 +41,15 @@
                                 <td class="border border-black">{{ $pedido->id}}</td>
                                 <td class="border border-black" >{{ $pedido->cliente->nome}}</td>
                                 <td class="border border-black" >{{ $pedido->created_at}}</td>
+                                <td class="border border-black"><a href="{{ route('pedidos-produtos.create', ['pedido'=>$pedido->id])}}">Adicionar</a></td> 
                                 
                                 <td class="border border-black">
                                     <form method="POST" id="form_{{$pedido->id}}" action="{{route('pedidos.destroy', ['pedido'=>$pedido->id])}}">
                                         @method('DELETE')
                                         @csrf
                                         <a href="#" onclick="document.getElementById('form_{{$pedido->id}}').submit()">Excluir</a>
-                                    </form>
+                                    </form> 
+
                                 </td>
 
                                 <td class="border border-black"><a href="{{ route('pedidos.edit', ['pedido'=>$pedido->id])}}">Editar</a></td> 

@@ -30,7 +30,8 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        //
+        $clientes = Cliente::all();
+        return view('app.pedidos.create', ['clientes' => $clientes]);
     }
 
     /**
@@ -38,7 +39,18 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $regras = [
+            'cliente_id' => 'exists:clientes,id',
+        ];
+
+        $feedback = [
+            'cliente_id.exists' => 'Esse cliente não existe no banco de dados'
+        ];
+
+        $request->validate($regras, $feedback);
+
+        Pedido::create($request->all());
+        return redirect()->route('pedidos.index');
     }
 
     /**
