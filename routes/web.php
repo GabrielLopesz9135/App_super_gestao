@@ -50,7 +50,7 @@ Route::resource('pedidos', PedidoController::class);
 /* Route::resource('pedidos-produtos', PedidoProdutoController::class); */
 
 Route::get('pedido-produto/create/{pedido}', [PedidoProdutoController::class, 'create'])->name('pedidos-produtos.create');
-Route::post('pedido-produto/store/{pedido}', [PedidoProdutoController::class, 'store'])->name('pedidos-produtos.store');
+Route::post('pedido-produto/store', [PedidoProdutoController::class, 'store'])->name('pedidos-produtos.store');
 
 Route::resource('produtos-detalhe', ProdutoDetalheController::class);
 
