@@ -17,7 +17,8 @@ class FornecedorController extends Controller
 
     public function index()
     {
-        return view('app.fornecedores.index');
+        $fornecedores = Fornecedor::paginate(10);
+        return view('app.fornecedores.index', ['fornecedores' => $fornecedores]);
     }
 
     public function show(Request $request)
@@ -27,7 +28,7 @@ class FornecedorController extends Controller
         ->where('site', 'like', '%'.$request->input('site').'%')
         ->where('UF', 'like', '%'.$request->input('UF').'%')
         ->where('email', 'like', '%'.$request->input('email').'%')
-        ->paginate(2);
+        ->paginate(10);
 
         return view('app.fornecedores.show', ['fornecedores'=>$fornecedores, 'request'=> $request->all()]);
     }
@@ -55,7 +56,7 @@ class FornecedorController extends Controller
         $request->validate($validate, $feedback);
         $this->model->create($request->all());
 
-        return view('app.fornecedores.index');
+        return redirect()->route('fornecedores.index');
     }
 
     public function edit($id){
@@ -76,7 +77,7 @@ class FornecedorController extends Controller
             $mensagem = 'Houve um erro ao Atualizar';
         }
 
-        return redirect()->route('fornecedores.edit', ['id'=> $fornecedor->id, 'mensagem'=> $mensagem]);
+        return redirect()->route('fornecedores.index');
     }
 
     public function delete(int $id){

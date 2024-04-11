@@ -13,7 +13,7 @@ class FornecedorSeeder extends Seeder
      */
     public function run(): void
     {
-        $fornecedor = new Fornecedor();
+        /* $fornecedor = new Fornecedor();
         $fornecedor->nome = 'Xiomi';
         $fornecedor->site = 'xiomu.com.br';
         $fornecedor->email = 'xiomi@contato.com';
@@ -25,6 +25,8 @@ class FornecedorSeeder extends Seeder
             'site'=>'Sansung.com.br',
             'email'=>'sansung@contato.com.br',
             'UF'=>'KO',
-        ]);
+        ]); */
+
+        Fornecedor::factory(30)->create();
     }
 }
