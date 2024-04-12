@@ -17,8 +17,9 @@ class FornecedorFactory extends Factory
     public function definition(): array
     {
         return [
-            'nome' => fake()->name(),
-            'email' => fake()->unique()->email(),
+            'id' => fake()->unique()->numberBetween(1, 15),
+            'nome' => fake()->company(),
+            'email' => fake()->unique()->companyEmail(),
             'UF' => fake()->countryCode(),
             'site' => fake()->domainName()
         ];

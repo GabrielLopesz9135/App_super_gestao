@@ -27,6 +27,6 @@ class FornecedorSeeder extends Seeder
             'UF'=>'KO',
         ]); */
 
-        Fornecedor::factory(30)->create();
+         Fornecedor::factory(15)->create();
     }
 }

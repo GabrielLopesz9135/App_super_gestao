@@ -16,7 +16,7 @@ class Produto extends Model
     }
 
     public function unidade(){
-        return $this->hasOne(Unidade::class, 'id', 'unidade_id');
+        return $this->belongsTo(Unidade::class);
     }
 
     public function fornecedor(){
